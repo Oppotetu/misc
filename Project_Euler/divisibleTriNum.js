@@ -1,6 +1,4 @@
-function findTriangleNumbers(num) {
-  return (num * (num + 1)) / 2;
-}
+
 
 // function factorTriangleNumbers() {
 //   var factors = [];
@@ -19,27 +17,37 @@ function findTriangleNumbers(num) {
 
 // console.log(factorTriangleNumbers())
 
-function findMaxFactors(maxFactors) {
-  var factors = [];
-  var triNum = 0;
-  var addCounter = 1;
+function findTriangleNumbers(n) {
+  return (n * (n + 1)) / 2;
+}
 
-  
-  while (factors.length <= maxFactors) {
-    triNum += addCounter;
-    addCounter += 1;
-    for (i = 1; i <= triNum; i++) {
-      if (triNum % i == 0) factors.push(i);
+function findMaxFactors(maxFactors) {
+
+  var nextTriangleNum;
+  var s;
+  for (i = 2;; i++) {
+    var factors = [];
+    nextTriangleNum = findTriangleNumbers(i);
+    s = Math.pow(nextTriangleNum, 0.5);
+    s = Math.floor(s);
+    for (j = 1; j <= s; j++) {
+      if (nextTriangleNum % j == 0) {
+        var quotient = nextTriangleNum / j;
+        factors.push(j);
+        factors.push(quotient);
+      }
     }
-    if (factors.length >= maxFactors) {
-      var result = "The triangle number " + triNum + " has " + factors.length + " factors: " + "\n" + factors.join(" ");
+    factors.push(nextTriangleNum);
+    let uFactors = [...new Set(factors)]
+    // factors[factors.length] = nextTriangleNum;
+    if (uFactors.length > maxFactors) {
+      var result = "The triangle number " + nextTriangleNum + " has " + uFactors.length + " factors: " + "\n" + uFactors.join(" ");
       return result; 
     }
-    factors = [];
   }
 }
 
 console.log(findMaxFactors(5));
 console.log(findMaxFactors(7));
 console.log(findMaxFactors(10));
-console.log(findMaxFactors(200));
+console.log(findMaxFactors(500));

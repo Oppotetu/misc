@@ -32,6 +32,6 @@ function getPrimes(max) {
   return primes;
 }
 
-const sum = getPrimes(2000000).reduce((partialSum, a) => partialSum + a, 0);
+const sum = getPrimes(2000000).filter(x => true).reduce((a, b) => a + b, 0);
 
 console.log(sum);

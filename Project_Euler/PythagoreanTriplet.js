@@ -1,18 +1,16 @@
 
 function pythagoreanTriplet(sum) {
   var a;
-  for (a = 1; a <= 400; a++) {
+  for (a = 1; a <= Math.floor(sum / 2); a++) {
     var b;
-    for (b = a + 1; b <= a + 200; b++) {
-      let apow = Math.pow(a, 2);
-      let bpow = Math.pow(b, 2);
-      let c = apow + bpow;
-      let croot = Math.sqrt(c);
-      if (!Number.isInteger(croot)) continue
-      if (a + b + croot == sum) {
-        let summ = a + b + croot;
-        let product = a * b * croot;
-        var res = "a = " + a + " b = " + b + " c = " + croot + "\n" + "sum: " + summ + "\n" + "product = " + product;
+    for (b = a + 1; b <= a + Math.floor(sum / 3); b++) {
+      let cpow = Math.pow(a, 2) + Math.pow(b, 2);
+      let c = Math.sqrt(cpow);
+      if (!Number.isInteger(c)) continue
+      if (a + b + c == sum) {
+        let sumCheck = a + b + c;
+        let product = a * b * c;
+        var res = `a = ${a}, b = ${b}, c = ${c}\nsum: ${sumCheck}\nproduct = ${product}`
         return res;
       };
     }

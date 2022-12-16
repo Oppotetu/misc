@@ -14,18 +14,18 @@
 
 // console.log(fib(7));
 // console.log(fib(50));
-// fibonacci
-// const fib = (n) => {
-//     if (n <=2) return 1;
+fibonacci
+const fib = (n) => {
+    if (n <=2) return 1;
 
-//     const result = fib(n - 1) + fib(n - 2);
-//     return result
-// }
+    const result = fib(n - 1) + fib(n - 2);
+    return result
+}
 
-// console.log(fib(7));
-// console.log(fib(9));
-// console.log(fib(3));
-// console.log(fib(50));
+console.log(fib(7));
+console.log(fib(9));
+console.log(fib(3));
+console.log(fib(50));
 
 // const gridTraveller = (m, n, memo = {}) => {
 //     const key = m + ',' + n;

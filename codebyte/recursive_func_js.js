@@ -14,18 +14,18 @@
 
 // console.log(fib(7));
 // console.log(fib(50));
-fibonacci
+// fibonacci
 const fib = (n) => {
-    if (n <=2) return 1;
+  if (n <= 2) return 1;
 
-    const result = fib(n - 1) + fib(n - 2);
-    return result
+  const result = fib(n - 1) + fib(n - 2);
+  return result
 }
 
 console.log(fib(7));
 console.log(fib(9));
 console.log(fib(3));
-console.log(fib(50));
+// console.log(fib(50));
 
 // const gridTraveller = (m, n, memo = {}) => {
 //     const key = m + ',' + n;
@@ -33,7 +33,7 @@ console.log(fib(50));
 //     if (key in memo) return memo[key];
 //     if (m === 1 && n === 1) return 1;
 //     if (m === 0 || n === 0) return 0;
-    
+
 //     memo[key] = gridTraveller(m - 1, n, memo) + gridTraveller(m, n - 1, memo);
 //     return memo[key];
 // }
@@ -67,31 +67,30 @@ console.log(fib(50));
 // console.log(canSum(8, [2, 3, 5]))
 // console.log(canSum(300, [7, 14]))
 
-// any combination that sums to sum
-// const howSum = (target, numbers, memo = {}) => {
+// any (first) combination that sums to sum
+const howSum = (target, numbers, memo = {}) => {
 
-//     if (target in memo) return memo[target]
-//     if (target === 0) return [];
-//     if (target < 0 ) return null; 
+  if (target in memo) return memo[target]
+  if (target === 0) return [];
+  if (target < 0) return null;
 
+  for (let i of numbers) {
+    const remainder = target - i
+    const result = howSum(remainder, numbers, memo);
+    if (result !== null) {
+      memo[target] = [...result, i]
+      return memo[target];
+    }
+  }
+  memo[target] = null
+  return null;
+};
 
-//     for (let i of numbers) {
-//         const remainder = target - i
-//         const result = howSum(remainder, numbers, memo);
-//         if (result !== null) {
-//             memo[target] = [...result, i]
-//             return memo[target];
-//         }
-//     }
-//     memo[target] = null
-//     return null;
-// };
-
-// console.log(howSum(7, [2, 3]))
-// console.log(howSum(7, [5,3,4,7]))
-// console.log(howSum(7, [2, 4]))
-// console.log(howSum(8, [2, 3, 5]))
-// console.log(howSum(300, [7, 14]))
+console.log(howSum(7, [2, 3]))
+console.log(howSum(7, [5, 3, 4, 7]))
+console.log(howSum(7, [2, 4]))
+console.log(howSum(8, [2, 3, 5]))
+console.log(howSum(300, [7, 14]))
 
 // best sum 
 
@@ -173,29 +172,29 @@ console.log(fib(50));
 
 // allConstruct
 
-const allConstruct = (target, wordBank, memo={}) => {
-    if (target in memo) return memo[target]
-    if (target === '') return [[]];
+// const allConstruct = (target, wordBank, memo = {}) => {
+//   if (target in memo) return memo[target]
+//   if (target === '') return [[]];
 
-    const result = [];
+//   const result = [];
 
-    for (let i of wordBank) {
-        if (target.indexOf(i) === 0) {
-            const suffix = target.slice(i.length);
-            const suffixWays = allConstruct(suffix,wordBank,memo);
-            const targetWays = suffixWays.map(way => [ i, ...way ]);
-            result.push(...targetWays);
-        }
-    }
-    memo[target] = result;
-    return result;
-};
+//   for (let i of wordBank) {
+//     if (target.indexOf(i) === 0) {
+//       const suffix = target.slice(i.length);
+//       const suffixWays = allConstruct(suffix, wordBank, memo);
+//       const targetWays = suffixWays.map(way => [i, ...way]);
+//       result.push(...targetWays);
+//     }
+//   }
+//   memo[target] = result;
+//   return result;
+// };
 
-console.log(allConstruct('hello', ['cat','dog','mouse'])) // 7
-console.log(allConstruct('purple', ['purp','p','ur','le','purpl'])) // 2
-console.log(allConstruct('abcdef', ['ab','abc','cd','def','abcd','ef','c'])) // 4
-console.log(allConstruct('skateboard', ['bo','rd','ate','t','ska','sk','boar'])) // -
-console.log(allConstruct('enterapotentpot', ['a','p','ent','enter','ot','o','t'])) // 
-console.log(allConstruct('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef', [
-    'e','ee','eee','eeee','eeeee','eeeeee'])) // 
+// console.log(allConstruct('hello', ['cat', 'dog', 'mouse'])) // 7
+// console.log(allConstruct('purple', ['purp', 'p', 'ur', 'le', 'purpl'])) // 2
+// console.log(allConstruct('abcdef', ['ab', 'abc', 'cd', 'def', 'abcd', 'ef', 'c'])) // 4
+// console.log(allConstruct('skateboard', ['bo', 'rd', 'ate', 't', 'ska', 'sk', 'boar'])) // -
+// console.log(allConstruct('enterapotentpot', ['a', 'p', 'ent', 'enter', 'ot', 'o', 't'])) // 
+// console.log(allConstruct('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef', [
+//   'e', 'ee', 'eee', 'eeee', 'eeeee', 'eeeeee'])) // 
 

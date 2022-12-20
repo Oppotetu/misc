@@ -18,8 +18,8 @@ const bruteSum = (target, numbers) => {
   return null;
 }
 
-console.log(bruteSum(7, [2,3]));
-console.log(bruteSum(7, [5,3,4,7]));
+// console.log(bruteSum(7, [2,3]));
+// console.log(bruteSum(7, [5,3,4,7]));
 
 // with memoization
 
@@ -42,6 +42,6 @@ const howSum = (target, numbers, memo = {}) => {
 }
 
 console.log(howSum(7, [2,3]));
-console.log(howSum(7, [5,3,4,7]));
-console.log(howSum(8, [2, 3, 5]))
+// console.log(howSum(7, [5,3,4,7]));
+// console.log(howSum(8, [2, 3, 5]));
 console.log(howSum(300, [7, 14]))

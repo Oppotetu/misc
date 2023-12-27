@@ -1,13 +1,12 @@
-
 // Course developed by Alvin Zablan from Coderbyte //
 
-fibonacci
+// fibonacci
 const fib = (n, memo = {}) => {
-  if (n in memo) return memo[n];
-  if (n <= 2) return 1;
+	if (n in memo) return memo[n]
+	if (n <= 2) return 1
 
-  memo[n] = fib(n - 1, memo) + fib(n - 2, memo);
-  return memo[n];
+	memo[n] = fib(n - 1, memo) + fib(n - 2, memo)
+	return memo[n]
 }
 
 // console.log(fib(7));
@@ -16,10 +15,10 @@ const fib = (n, memo = {}) => {
 // fibonacci
 
 const bruteFib = (n) => {
-  if (n <= 2) return 1;
+	if (n <= 2) return 1
 
-  const result = bruteFib(n - 1) + bruteFib(n - 2);
-  return result
+	const result = bruteFib(n - 1) + bruteFib(n - 2)
+	return result
 }
 
 // console.log(bruteFib(7));
@@ -28,14 +27,14 @@ const bruteFib = (n) => {
 // console.log(bruteFib(50));
 
 const gridTraveller = (m, n, memo = {}) => {
-  const key = m + ',' + n;
+	const key = m + "," + n
 
-  if (key in memo) return memo[key];
-  if (m === 1 && n === 1) return 1;
-  if (m === 0 || n === 0) return 0;
+	if (key in memo) return memo[key]
+	if (m === 1 && n === 1) return 1
+	if (m === 0 || n === 0) return 0
 
-  memo[key] = gridTraveller(m - 1, n, memo) + gridTraveller(m, n - 1, memo);
-  return memo[key];
+	memo[key] = gridTraveller(m - 1, n, memo) + gridTraveller(m, n - 1, memo)
+	return memo[key]
 }
 
 // console.log(gridTraveller(3, 3))
@@ -43,23 +42,20 @@ const gridTraveller = (m, n, memo = {}) => {
 
 // CAN SUM
 const canSum = (target, numbers, memo = {}) => {
+	if (target in memo) return memo[target]
+	if (target === 0) return true
+	if (target < 0) return false
 
-
-  if (target in memo) return memo[target];
-  if (target === 0) return true;
-  if (target < 0) return false;
-
-
-  for (let num of numbers) {
-    const remainder = target - num;
-    if (canSum(remainder, numbers, memo) === true) {
-      memo[target] = true;
-      return true;
-    }
-  }
-  memo[target] = false;
-  return false;
-};
+	for (let num of numbers) {
+		const remainder = target - num
+		if (canSum(remainder, numbers, memo) === true) {
+			memo[target] = true
+			return true
+		}
+	}
+	memo[target] = false
+	return false
+}
 
 // console.log(canSum(7, [2, 3]))
 // console.log(canSum(7, [5,3,4,7]))
@@ -69,22 +65,21 @@ const canSum = (target, numbers, memo = {}) => {
 
 // any (first) combination that sums to sum
 const howSum = (target, numbers, memo = {}) => {
+	if (target in memo) return memo[target]
+	if (target === 0) return []
+	if (target < 0) return null
 
-  if (target in memo) return memo[target]
-  if (target === 0) return [];
-  if (target < 0) return null;
-
-  for (let i of numbers) {
-    const remainder = target - i
-    const result = howSum(remainder, numbers, memo);
-    if (result !== null) {
-      memo[target] = [...result, i]
-      return memo[target];
-    }
-  }
-  memo[target] = null
-  return null;
-};
+	for (let i of numbers) {
+		const remainder = target - i
+		const result = howSum(remainder, numbers, memo)
+		if (result !== null) {
+			memo[target] = [...result, i]
+			return memo[target]
+		}
+	}
+	memo[target] = null
+	return null
+}
 
 // console.log(howSum(7, [2, 3]))
 // console.log(howSum(7, [5, 3, 4, 7]))
@@ -92,28 +87,30 @@ const howSum = (target, numbers, memo = {}) => {
 // console.log(howSum(8, [2, 3, 5]))
 // console.log(howSum(300, [7, 14]))
 
-// best sum 
+// best sum
 
 const bestSum = (target, numbers, memo = {}) => {
+	if (target in memo) return memo[target]
+	if (target === 0) return []
+	if (target < 0) return null
 
-  if (target in memo) return memo[target]
-  if (target === 0) return []
-  if (target < 0) return null
+	let shortestCombination = null
 
-  let shortestCombination = null
-
-  for (let i of numbers) {
-    const remainder = target - i
-    const niteration = bestSum(remainder, numbers, memo)
-    if (niteration !== null) {
-      const combination = [...niteration, i]
-      if (shortestCombination === null || combination.length < shortestCombination.length) {
-        shortestCombination = combination;
-      }
-    }
-  }
-  memo[target] = shortestCombination;
-  return shortestCombination
+	for (let i of numbers) {
+		const remainder = target - i
+		const niteration = bestSum(remainder, numbers, memo)
+		if (niteration !== null) {
+			const combination = [...niteration, i]
+			if (
+				shortestCombination === null ||
+				combination.length < shortestCombination.length
+			) {
+				shortestCombination = combination
+			}
+		}
+	}
+	memo[target] = shortestCombination
+	return shortestCombination
 }
 
 // console.log(bestSum(7, [5,3,4,7])) // 7
@@ -124,21 +121,21 @@ const bestSum = (target, numbers, memo = {}) => {
 // canConstruct
 
 const canConstruct = (target, wordBank, memo = {}) => {
-  if (target in memo) return memo[target]
-  if (target === '') return true
+	if (target in memo) return memo[target]
+	if (target === "") return true
 
-  for (let i of wordBank) {
-    if (target.indexOf(i) === 0) {
-      const suffix = target.slice(i.length);
-      if (canConstruct(suffix, wordBank, memo) === true) {
-        memo[target] = true
-        return memo[target]
-      }
-    }
-  }
-  memo[target] = false
-  return memo[target];
-};
+	for (let i of wordBank) {
+		if (target.indexOf(i) === 0) {
+			const suffix = target.slice(i.length)
+			if (canConstruct(suffix, wordBank, memo) === true) {
+				memo[target] = true
+				return memo[target]
+			}
+		}
+	}
+	memo[target] = false
+	return memo[target]
+}
 
 // console.log(canConstruct('abcdef', ['ab','abc','cd','def','abcd'])) // true
 // console.log(canConstruct('skateboard', ['bo','rd','ate','t','ska','sk','boar'])) // false
@@ -149,19 +146,19 @@ const canConstruct = (target, wordBank, memo = {}) => {
 // countConstruct
 
 const countConstruct = (target, wordBank, memo = {}) => {
-  if (target in memo) return memo[target]
-  if (target === '') return 1
+	if (target in memo) return memo[target]
+	if (target === "") return 1
 
-  let counter = 0;
+	let counter = 0
 
-  for (let i of wordBank) {
-    if (target.indexOf(i) === 0) {
-      const numWays = countConstruct(target.slice(i.length), wordBank, memo)
-      counter += numWays;
-    }
-  }
-  memo[target] = counter
-  return memo[target]
+	for (let i of wordBank) {
+		if (target.indexOf(i) === 0) {
+			const numWays = countConstruct(target.slice(i.length), wordBank, memo)
+			counter += numWays
+		}
+	}
+	memo[target] = counter
+	return memo[target]
 }
 
 // console.log(countConstruct('purple', ['purp','p','ur','le','purpl'])) // 2
@@ -174,22 +171,22 @@ const countConstruct = (target, wordBank, memo = {}) => {
 allConstruct
 
 const allConstruct = (target, wordBank, memo = {}) => {
-  if (target in memo) return memo[target]
-  if (target === '') return [[]];
+	if (target in memo) return memo[target]
+	if (target === "") return [[]]
 
-  const result = [];
+	const result = []
 
-  for (let i of wordBank) {
-    if (target.indexOf(i) === 0) {
-      const suffix = target.slice(i.length);
-      const suffixWays = allConstruct(suffix, wordBank, memo);
-      const targetWays = suffixWays.map(way => [i, ...way]);
-      result.push(...targetWays);
-    }
-  }
-  memo[target] = result;
-  return result;
-};
+	for (let i of wordBank) {
+		if (target.indexOf(i) === 0) {
+			const suffix = target.slice(i.length)
+			const suffixWays = allConstruct(suffix, wordBank, memo)
+			const targetWays = suffixWays.map((way) => [i, ...way])
+			result.push(...targetWays)
+		}
+	}
+	memo[target] = result
+	return result
+}
 
 // console.log(allConstruct('hello', ['cat', 'dog', 'mouse'])) // 7
 // console.log(allConstruct('purple', ['purp', 'p', 'ur', 'le', 'purpl'])) // 2
@@ -197,5 +194,4 @@ const allConstruct = (target, wordBank, memo = {}) => {
 // console.log(allConstruct('skateboard', ['bo', 'rd', 'ate', 't', 'ska', 'sk', 'boar'])) // -
 // console.log(allConstruct('enterapotentpot', ['a', 'p', 'ent', 'enter', 'ot', 'o', 't'])) //
 // console.log(allConstruct('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef', [
-//   'e', 'ee', 'eee', 'eeee', 'eeeee', 'eeeeee'])) // 
-
+//   'e', 'ee', 'eee', 'eeee', 'eeeee', 'eeeeee'])) //
